@@ -1,0 +1,63 @@
+-- SB invisibility
+
+local player = game.Players.LocalPlayer
+local gui = Instance.new("ScreenGui")
+local frame = Instance.new("Frame")
+local nameLabel = Instance.new("TextLabel")
+local creditsLabel = Instance.new("TextLabel")
+local button = Instance.new("TextButton")
+
+-- set up the gui
+gui.Name = "SB invisibility"
+gui.Parent = player.PlayerGui
+
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.Position = UDim2.new(0, 10, 0, 10)
+frame.Size = UDim2.new(0, 150, 0, 90)
+frame.Parent = gui
+
+nameLabel.Text = "SB invisibility"
+nameLabel.Font = Enum.Font.SourceSansBold
+nameLabel.FontSize = Enum.FontSize.Size18
+nameLabel.TextColor3 = Color3.new(255, 255, 255)
+nameLabel.BackgroundTransparency = 1
+nameLabel.Position = UDim2.new(0, 10, 0, 10)
+nameLabel.Size = UDim2.new(0, 130, 0, 20)
+nameLabel.Parent = frame
+
+creditsLabel.Text = "Made by Oliver"
+creditsLabel.Font = Enum.Font.SourceSans
+creditsLabel.FontSize = Enum.FontSize.Size14
+creditsLabel.TextColor3 = Color3.new(255, 255, 255)
+creditsLabel.BackgroundTransparency = 1
+creditsLabel.Position = UDim2.new(0, 10, 0, 35)
+creditsLabel.Size = UDim2.new(0, 130, 0, 20)
+creditsLabel.Parent = frame
+
+button.BackgroundColor3 = Color3.new(0, 255, 0)
+button.Position = UDim2.new(0, 10, 0, 60)
+button.Size = UDim2.new(0, 130, 0, 30)
+button.Text = "invisibility"
+button.Font = Enum.Font.SourceSansBold
+button.FontSize = Enum.FontSize.Size18
+button.TextColor3 = Color3.new(0, 0, 0)
+button.Parent = frame
+
+-- invisibility script
+button.MouseButton1Click:Connect(function()
+local character = player.Character or player.CharacterAdded:Wait()
+if character.isInArena.Value == false then
+fireclickdetector(game.Workspace.Lobby.Ghost.ClickDetector)
+game:GetService("ReplicatedStorage").Ghostinvisibilityactivated:FireServer()
+
+while character.Humanoid.Health ~= 0 do
+character.Head.Transparency = 0.5
+character.Torso.Transparency = 0.5
+character["Left Arm"].Transparency = 0.5
+character["Right Arm"].Transparency = 0.5
+character["Left Leg"].Transparency = 0.5
+character["Right Leg"].Transparency = 0.5
+wait(0.05)
+end
+end
+end)
